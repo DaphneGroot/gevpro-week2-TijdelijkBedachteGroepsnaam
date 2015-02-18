@@ -52,3 +52,7 @@ docs/_build/
 
 # PyBuilder
 target/
+
+# Toevoegen om te negeren voor opdracht
+*.swp
+*.un~
