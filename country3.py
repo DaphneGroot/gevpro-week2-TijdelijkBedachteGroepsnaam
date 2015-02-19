@@ -1,12 +1,12 @@
 #!/usr/bin/env python
 #country.py
 #Daphne Groot
+#Hennie Veldthuis
 
 from PyQt4 import QtGui
 from PyQt4.QtCore import *
 from PyQt4.QtGui import *
 import sys
-from opdracht3_2 import *
 from random import *
 
 class Country(QtGui.QWidget):
@@ -30,16 +30,11 @@ class Country(QtGui.QWidget):
         #Connecties voor aanpassen aan nieuwe gegevens
         self.connect(self.comboboxLand,SIGNAL("currentIndexChanged(int)"), self.updateUi)
 
+        self.kleur = QtGui.QColor(0, 0, 0)
 
-        #################################################################################
-        self.col = QtGui.QColor(0, 0, 0)
-
-        # self.comboboxLand.clicked[bool].connect(self.setColor)
-
-        self.square = QtGui.QFrame(self)
-        self.square.setGeometry(150, 120, 100, 100)
-        self.square.setStyleSheet("QWidget { background-color: %s }" %  
-            self.col.name())
+        self.vlag = QtGui.QFrame(self)
+        self.vlag.setGeometry(150, 120, 100, 100)
+        self.vlag.setStyleSheet("QWidget { background-color: %s }" % self.kleur.name())
         
         
     def getCountry(self):
@@ -59,12 +54,11 @@ class Country(QtGui.QWidget):
         landnaam = str(self.comboboxLand.currentText())
 
         
-        self.col.setRed(randrange(0, 256))
-        self.col.setGreen(randrange(0, 256))
-        self.col.setBlue(randrange(0, 256)) 
+        self.kleur.setRed(randrange(0, 256))
+        self.kleur.setGreen(randrange(0, 256))
+        self.kleur.setBlue(randrange(0, 256)) 
             
-        self.square.setStyleSheet("QFrame { background-color: %s }" %
-            self.col.name())  
+        self.vlag.setStyleSheet("QFrame { background-color: %s }" % self.kleur.name())  
 
     
     
