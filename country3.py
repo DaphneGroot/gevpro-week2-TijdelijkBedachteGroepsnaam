@@ -8,6 +8,7 @@ from PyQt4.QtCore import *
 from PyQt4.QtGui import *
 import sys
 from random import *
+from flag_color import *
 
 class Country(QtGui.QWidget):
     def __init__(self):
@@ -27,14 +28,29 @@ class Country(QtGui.QWidget):
         self.comboboxLand.adjustSize()
         self.comboboxLand.move(40, 30)
         
-        #Connecties voor aanpassen aan nieuwe gegevens
-        self.connect(self.comboboxLand,SIGNAL("currentIndexChanged(int)"), self.updateUi)
-
         self.kleur = QtGui.QColor(0, 0, 0)
-
         self.vlag = QtGui.QFrame(self)
         self.vlag.setGeometry(150, 120, 100, 100)
         self.vlag.setStyleSheet("QWidget { background-color: %s }" % self.kleur.name())
+        
+
+        
+        self.landenVlag = {}
+        for land in landen:
+            self.kleur = QtGui.QColor(0, 0, 0)
+            self.kleur.setRed(randrange(0, 256))
+            self.kleur.setGreen(randrange(0, 256))
+            self.kleur.setBlue(randrange(0, 256))
+            
+            vlag = self.kleur
+            self.landenVlag[land] = vlag
+            
+        print(self.landenVlag)
+
+        
+        #Connecties voor aanpassen aan nieuwe gegevens
+        self.connect(self.comboboxLand,SIGNAL("currentIndexChanged(int)"), self.updateUi)
+        
         
         
     def getCountry(self):
@@ -52,13 +68,10 @@ class Country(QtGui.QWidget):
         """ Zorgt ervoor dat de gegevens in de combobox geupdate zijn """
         #Aanpassen aan nieuwe gegevens
         landnaam = str(self.comboboxLand.currentText())
-
         
-        self.kleur.setRed(randrange(0, 256))
-        self.kleur.setGreen(randrange(0, 256))
-        self.kleur.setBlue(randrange(0, 256)) 
-            
-        self.vlag.setStyleSheet("QFrame { background-color: %s }" % self.kleur.name())  
+        self.landenVlag[landnaam]
+        
+        self.vlag.setStyleSheet("QFrame { background-color: %s }" % self.landenVlag[landnaam].name())  
 
     
     
