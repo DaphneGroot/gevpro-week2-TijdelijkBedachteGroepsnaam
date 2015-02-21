@@ -24,8 +24,6 @@ class Flagcolor(QtGui.QColor):
         self.kleur.setGreen(randrange(0, 256))
         self.kleur.setBlue(randrange(0, 256))
         
-        print(self.kleur)
-        
         
 def main():
     app = QtGui.QApplication(sys.argv)
