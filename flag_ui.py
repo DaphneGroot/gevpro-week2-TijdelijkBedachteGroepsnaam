@@ -28,29 +28,19 @@ class Country(QtGui.QWidget):
         self.comboboxLand.adjustSize()
         self.comboboxLand.move(40, 30)
         
-        self.kleur = QtGui.QColor(0, 0, 0)
-        self.vlag = QtGui.QFrame(self)
-        self.vlag.setGeometry(150, 120, 100, 100)
-        self.vlag.setStyleSheet("QWidget { background-color: %s }" % self.kleur.name())
-        
-
-        
+        #Elk land een bijbehorende random kleur geven
         self.landenVlag = {}
         for land in landen:
-            self.kleur = QtGui.QColor(0, 0, 0)
-            self.kleur.setRed(randrange(0, 256))
-            self.kleur.setGreen(randrange(0, 256))
-            self.kleur.setBlue(randrange(0, 256))
-            
-            vlag = self.kleur
-            self.landenVlag[land] = vlag
-            
-        print(self.landenVlag)
+            self.kleur = Flagcolor().kleur
+            self.landenVlag[land] = self.kleur
 
-        
+        #'Vlag' maken
+        self.vlag = QtGui.QFrame(self)
+        self.vlag.setGeometry(150, 120, 150, 100)
+        self.vlag.setStyleSheet("QWidget { background-color: %s }" % self.kleur.name())
+
         #Connecties voor aanpassen aan nieuwe gegevens
         self.connect(self.comboboxLand,SIGNAL("currentIndexChanged(int)"), self.updateUi)
-        
         
         
     def getCountry(self):
@@ -69,9 +59,7 @@ class Country(QtGui.QWidget):
         #Aanpassen aan nieuwe gegevens
         landnaam = str(self.comboboxLand.currentText())
         
-        self.landenVlag[landnaam]
-        
-        self.vlag.setStyleSheet("QFrame { background-color: %s }" % self.landenVlag[landnaam].name())  
+        self.vlag.setStyleSheet("QFrame { background-color: %s }" % self.landenVlag[landnaam].name())
 
     
     
@@ -80,7 +68,7 @@ def main():
     app = QtGui.QApplication(sys.argv)
     Landennaam = Country()
     Landennaam.setWindowTitle('Landennaam')
-    Landennaam.setGeometry(400, 400, 500, 300)
+    Landennaam.setGeometry(400, 400, 400, 300)
     Landennaam.show()
     sys.exit(app.exec_())
 
